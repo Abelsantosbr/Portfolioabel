@@ -1,0 +1,167 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{ ViewData["Title"] = "Migration"; }
+
+<div>
+    <textarea readonly class="tituloAreaCodigo">
+      .Net Core - Migrations
+    </textarea>
+
+    <p class="areaTexto">
+        Migrtions é um recurso do Entity Framework no Net core que permite a atualização de dados a partir das classes de
+        modelo de domínio do projeto.<br />
+        Utilizando este recurso conseguimos de dentro da nossa aplicação manter sincronizados o modelo de domínio com o banco de dados.
+
+        Com Migrations podemos gerar scripts que atualizam banco de dados, desfaz alterações feitas revertendo a migração, personalizar o código dentre outras tarefas.<br />
+
+        Gerar ou atualizar bases de dados à partir de classes do modelo chama-se Code First, muito utilizado principalmente
+        em metodologias ágeis onde o time de desenvolvimento está constantemente de forma incremental alterando o modelo de classes do domínio pra atender os requisitos de negócios.<br />
+
+        Para ter certo contato com esta tecnologia ORM do EntityFrameWork Core eu desenvolvi uma aplicação .Net 5 que utiliza Migrations.<br />
+
+        Neste caso o banco de dados não existe e é gerado à partir do modelo definido.<br />
+        <br />
+    </p>
+    <br />
+    <p class="areaTexto">
+          Para criar a primeira migração (Cli do .NET) : <br />
+          <span style="color:blue">
+             --> dotnet ef migrations add Inicial     (Gera os scipts)<br />
+             --> dotnet ef database update   (Gera o Banco de dados) <br />
+          </span>
+    </p>
+    <br />
+    <h4> Código C# - Classe Carro</h4>
+    <textarea readonly class="areaCodigo">
+        using System;
+        using System.Collections.Generic;
+        using System.Linq;
+        using System.Threading.Tasks;
+
+        namespace GaragemApp.Models
+        {
+            public class Carro : Entity
+            {
+                public Guid MarcaId { get; set; }
+                public string Modelo { get; set; }
+                public string Versao { get; set; }
+
+                public Marca Marca { get; set; }
+            }
+        }
+
+    </textarea>
+    <br />
+    <h4> Código C# - Classe Marca</h4>
+    <textarea readonly class="areaCodigo">
+        using GaragemApp.Models;
+        using System;
+        using System.Collections.Generic;
+        using System.Linq;
+        using System.Threading.Tasks;
+
+        namespace GaragemApp
+        {
+            public class Marca : Entity
+            {
+                public IEnumerable<Carro> Carro{ get; set; }
+                public string Nome { get; set; }
+            }
+
+        }
+
+    </textarea>
+    <br />
+    <h4> Código C# - Classe Entity</h4>
+    <textarea readonly class="areaCodigo">
+        using System;
+        using System.Collections.Generic;
+        using System.Linq;
+        using System.Threading.Tasks;
+
+        namespace GaragemApp.Models
+        {
+            public class Entity
+            {
+                public Guid Id { get; set; }  
+
+                public Entity()
+                {
+                    Id = Guid.NewGuid();      
+                }
+
+            }
+        }
+    </textarea>
+    <br />
+    <h4> Código C# - Classe Migration</h4>
+    <textarea readonly class="areaCodigo">
+        using System;
+        using Microsoft.EntityFrameworkCore.Migrations;
+
+        namespace GaragemApp.Migrations
+        {
+            public partial class Inicial : Migration
+            {
+                protected override void Up(MigrationBuilder migrationBuilder)
+                {
+                    migrationBuilder.CreateTable(
+                        name: "Marcas",
+                        columns: table => new
+                        {
+                            Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                            Nome = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                        },
+                        constraints: table =>
+                        {
+                            table.PrimaryKey("PK_Marcas", x => x.Id);
+                        });
+
+                    migrationBuilder.CreateTable(
+                        name: "Carros",
+                        columns: table => new
+                        {
+                            Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                            MarcaId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                            Modelo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                            Versao = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                        },
+                        constraints: table =>
+                        {
+                            table.PrimaryKey("PK_Carros", x => x.Id);
+                            table.ForeignKey(
+                                name: "FK_Carros_Marcas_MarcaId",
+                                column: x => x.MarcaId,
+                                principalTable: "Marcas",
+                                principalColumn: "Id",
+                                onDelete: ReferentialAction.Cascade);
+                        });
+
+                    migrationBuilder.CreateIndex(
+                        name: "IX_Carros_MarcaId",
+                        table: "Carros",
+                        column: "MarcaId");
+                }
+
+                protected override void Down(MigrationBuilder migrationBuilder)
+                {
+                    migrationBuilder.DropTable(
+                        name: "Carros");
+
+                    migrationBuilder.DropTable(
+                        name: "Marcas");
+                }
+            }
+        }
+
+    </textarea>
+    <br />
+    <br />
+    <br />
+    <h4> Banco de dados criado</h4>
+    <img src="~/imagens/Migration_GaragemApp.png" />
+    <br />
+    <br />
+
+</div>

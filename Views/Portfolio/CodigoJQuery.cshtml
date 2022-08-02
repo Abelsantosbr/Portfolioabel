@@ -1,0 +1,57 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{ ViewData["Title"] = "CodigoJQuery"; }
+
+<div>
+    <textarea readonly class="tituloAreaCodigo">
+       Código JQuery
+    </textarea>
+    <textarea readonly class="areaCodigo">
+$(document).ready(function(){
+    $(window).load(function (ev) {
+        ev.preventDefault();
+
+        var id = $("a[rel=modal]").attr("href");
+
+        var alturaTela = $(document).height();
+        var larguraTela = $(window).width();
+
+                                //colocando o fundo preto
+        $('#mascara').css({'width':larguraTela,'height':alturaTela});
+        $('#mascara').fadeIn(1000);
+        $('#mascara').fadeTo("slow",0.8);
+
+        var left = ($(window).width() /2) - ( $(id).width() / 2 );
+        var top = ($(window).height() / 2) - ( $(id).height() / 2 );
+
+        $(id).css({'top':top,'left':left});
+        $(id).show();
+    });
+
+    $("#mascara").load( function(){
+        $(this).show();
+        $(".window").show();
+    });
+
+    $('.fechar').click(function(ev){
+        ev.preventDefault();
+        $("#mascara").hide();
+        $(".window").hide();
+    });
+});
+
+
+
+    <script type="text/javascript">
+
+        var $formulario = $(this),
+            usuario = $formulario.find("input[name='usuario']").val(),
+            url = "https://api.github.com/users/" + usuario + "/repos";
+   </script>
+
+ </textarea>
+
+</div>
+
+

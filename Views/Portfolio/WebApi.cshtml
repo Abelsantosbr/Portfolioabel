@@ -1,0 +1,176 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+
+@{ ViewData["Title"] = "WebApi"; }
+
+<div>
+
+    <textarea readonly class="tituloAreaCodigo">
+       Web API / CORS
+    </textarea>
+
+    <br />
+    <h4> Código c# - Classe Proprietário</h4>
+    <textarea readonly class="areaCodigo">
+namespace CRUDAPI.Models
+{
+    public class Proprietario {
+        public short ProprietarioId { get; set; }
+        public short Unidade_cond { get; set; }
+        public DateTime Dt_ini_prop { get; set; }
+        public DateTime Dt_fin_prop { get; set; }
+        public string? Nome { get; set; }
+        public string? Sobrenome { get; set; }
+        public DateTime? Data_nasc { get; set; }
+        public string? Profissao { get; set; }
+        public long CPF { get; set; }
+        public long RG { get; set; }
+        public string? Unidade_alugada { get; set; }
+        public string? Login { get; set; }
+        public string Senha { get; set; }
+    }
+}
+    </textarea>
+    <br />
+    <br />
+    <h4> Código c# - Controller Proprietário</h4>
+    <textarea readonly class="areaCodigo">
+
+        using CRUDAPI.Models;
+        using Microsoft.AspNetCore.Mvc;
+        using System.Collections.Generic;
+        using Microsoft.EntityFrameworkCore;
+        using System.Threading.Tasks;
+        using System.Text.Json;
+        using Microsoft.AspNetCore.Cors;
+
+        namespace CRUDAPI.Controllers
+        {
+        [ApiController]
+        [Route("api/[controller]")]
+
+        public class ProprietariosController: ControllerBase{
+
+        private readonly Contexto _contexto;
+
+        public ProprietariosController(Contexto contexto)
+        {
+        _contexto = contexto;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Proprietario>>> PegarTodosAsync(){
+            return await _contexto.Proprietarios.ToListAsync();
+        }
+
+        [HttpGet("{proprietarioId}")]
+        public async Task<ActionResult<Proprietario>> PegarProprietarioPeloIdAsync(short proprietarioId){
+            Proprietario proprietario = await _contexto.Proprietarios.FindAsync(proprietarioId);
+            if (proprietario == null)
+              return NotFound();
+
+            return proprietario;
+        }
+
+
+        [HttpPost]
+        public async Task<ActionResult<Proprietario>> SalvarProprietarioAsync(Proprietario proprietario){
+            await _contexto.Proprietarios.AddAsync(proprietario);
+            await _contexto.SaveChangesAsync();
+            return Ok();
+        }
+
+
+        [HttpPut]  //enviado o objeto proprietario inteiro e não o id
+        public async Task<ActionResult> SalvarAtualizarProprietarioAsync(Proprietario proprietario){
+           _contexto.Proprietarios.Update(proprietario);
+            await _contexto.SaveChangesAsync();
+            return Ok();
+        }
+
+        [HttpDelete("{proprietarioId}")]
+        public async Task<ActionResult> ExcluirProprietarioAsync(short proprietarioId){
+                Proprietario proprietario = await _contexto.Proprietarios.FindAsync(proprietarioId);
+                _contexto.Remove(proprietario);
+                await _contexto.SaveChangesAsync();
+                return Ok();
+        }
+    }
+}
+        </textarea>
+    <h4> Código c# - Configuração CORS - Cross-origin Resource Sharing <br />
+         (Compartilhamento de Recursos de Origem Cruzada)</h4>
+    <p class="areaTexto">
+        No meu projeto de iniciante de Angular não tive problemas para renderizar no navegador local o projeto compilado mas quando
+        fiz o deploy para o Host de hospedagem o navegador recusou a aplicação para evitar ataques maliciosos ao navegador.<br />
+        É um mecanismo de segurança dos navegadores protegendo a aplicação. Os navegadores são capazes de identificar as
+        origens envolvidas nas aplicação.
+        Quando as origens são iguais (Política de mesma origem) o navegador entende como uma fonte segura.<br />
+        Minha aplicação Angular utiliza os serviços de API que desenvolvi em Dot Net e no meu navegador local a
+        execução ocorreu normalmente porque tanto o front-end e o back-end estão no mesmo ambiente.<br />
+        Para garntir a liberação de execução de forma segura no navegador quando fiz o deploy eu tive que
+        configurar o recurso CORS para aceitação.<br />
+        O CORS interpreta os Headers HTTP para informar ao navegador se o recurso pode ser liberado ou não.<br />
+        <br />
+        No program.cs da aplicação Back-end (Dot Net) fiz as devidas configurações para liberar o acesso.<br />
+        <br />
+    </p>
+    <br />
+    <h4> Código c# - Program.cs do Backend com as configurações CORS</h4>
+    <p  class="areaTexto">
+    using CRUDAPI.Models;<br />
+    using Microsoft.EntityFrameworkCore;<br />
+    using Microsoft.Net.Http;<br />
+    <br />
+    var builder = WebApplication.CreateBuilder(args);<br />
+    <br />
+    // Add services to the container.<br />
+    <br />
+    builder.Services.AddControllers();<br />
+    <br />
+    builder.Services.AddDbContext<Contexto>
+    (x => x.UseSqlServer(builder.Configuration.GetConnectionString("ConexaoBD")));<br />
+    <br />
+    builder.Services.AddEndpointsApiExplorer();<br />
+    builder.Services.AddSwaggerGen();<br />
+    <br />
+    <span style="color:blue">
+        //Cors - permite a troca de requisições entre origens (cliente e servidor)<br />
+        builder.Services.AddCors(options =><br />
+        {
+        options.AddPolicy(name: "corsapp",<br />
+        builder =><br />
+        {
+        builder.WithOrigins("http://localhost:4200",<br />
+        "www.admisys.com.br/apiproprietario/api/proprietarios",<br />
+        "www.admisys.com.br/apiproprietario/api/moradores",<br />
+        "www.admisys.com.br/apiproprietario/api/usuarios",<br />
+        "www.admisys.com.br/apiproprietario/api/sindicos")<br />
+        .WithMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")<br />
+        .AllowAnyHeader();<br />
+        });<br />
+        });
+    </span><br />
+    var app = builder.Build();<br />
+    <br />
+    // Configure the HTTP request pipeline.<br />
+    <br />
+    if (app.Environment.IsDevelopment())<br />
+    {<br />
+    app.UseSwagger();<br />
+    app.UseSwaggerUI();<br />
+    }<br />
+    <br />
+    app.UseHttpsRedirection();<br />
+    <span style="color:blue">
+        app.UseCors("corsapp");</span><br />
+    app.UseAuthorization();<br />
+    <br />
+    app.MapControllers();<br />
+    <br />
+    app.Run();<br />
+    <br />
+</p>
+</div>

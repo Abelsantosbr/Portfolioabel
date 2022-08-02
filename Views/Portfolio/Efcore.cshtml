@@ -1,0 +1,44 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{ ViewData["Title"] = "Efcore"; }
+
+<div>
+    <textarea readonly class="tituloAreaCodigo">
+       EntityFrameWork Core
+    </textarea>
+    <p class="areaTexto">
+        Falando de Core, seu ORM é o EntityFrameWork Core ou EFCore, desenvolvido do zero pela equipe da Microsoft
+        melhorando sua performance nos recursos.<br />
+        <br />
+        O EfCore é um recurso para aplicações Multiplataforma.<br />
+        <br />
+        O EntityFramWork pode ser usado de forma performática considerando alguns cuidados como manter uma só instancia do contexto,
+        evitar campos desnecessários nas consultas e sobre o uso do método Tracking e AsNoTracking, principalmente em consultas de alta escala.<br />
+        Para os desenvolvedores que se preocupam com a otimização
+        de respostas sobre o banco de dados usado em alta escala podem otimizar em consultas readonly
+        desabilitando a rastreabilidade de objetos em memória utilizando o método AsNoTracking<br />
+        Desabilitar este método quando possível otimiza os processos e alivia os recursos de servidor.<br />
+        <br />
+        Já vi vários comentários e sugestões de uso ou não destes métodos. Sugiro cada desenvolvedor estudar os
+        mecanismos de ação destes métodos para tomar decisões assertivas.<br />
+    </p>
+    <br />
+        <h4> Código C# - exemplo de classe com método AsNoTraccking</h4>
+        <textarea readonly class="areaCodigo">
+                
+         public List<Boletos> List()
+             {
+               _context = new SystemContext();   
+               return _context.Boletos.ToList();
+             }
+
+
+         public List<Boletos> ListNoTracking()
+             {
+              _context = new SystemContext();  
+              return _context.Boletos.AsNoTracking.ToList();
+             }
+
+        </textarea>
+</div>

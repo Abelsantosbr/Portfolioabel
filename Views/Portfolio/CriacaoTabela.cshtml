@@ -1,0 +1,66 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{ ViewData["Title"] = "CriacaoTabela"; }
+
+<div>
+    <textarea readonly class="tituloAreaCodigo">
+       Banco de dados Sql Server - Criação de tabela
+    </textarea>
+
+    <p readonly class="areaTexto">
+        Os dados do nosso projeto deveriam estar normalizados no modelo relacional conceitual e seguindo este 
+        modelo realizar a implementação através de tabelas e relacionamentos adicionados ao banco de dados.
+
+        A criação de tabelas ou entidades são objetos que possuem tuplas (registros) e cada tupla possue
+        propriedades (atributos) que identificam um dado de requuisito.
+
+        Abaixo um script para criação de uma tabela exemplo :
+
+        <span style="color:blue">
+            <br />
+            USE [PF_SGCR]<br />
+            GO<br />
+
+            SET ANSI_NULLS ON <br />
+            GO<br />
+
+            SET QUOTED_IDENTIFIER ON<br />
+            GO<br />
+
+            CREATE TABLE [dbo].[Boletos](<br />
+               [MNEM_COND] [char](6) NOT NULL,<br />
+               [BLOCO] [char](1) NOT NULL,<br />
+               [UNIDADE] [int] NOT NULL,<br />
+               [NUM_EMISSAO] [int] NOT NULL,<br />
+               [NOME_MOR] [varchar](50) NULL,<br />
+               [NUM1_TITULO] [smallint] NULL,<br />
+               [NUM2_TITULO] [int] NULL,<br />
+               [DV_TITULO] [char](1) NULL,<br />
+               [DT_VENCIMENTO] [datetime] NULL,<br />
+               [DT_EMISSAO] [datetime] NULL,<br />
+               [VL_TITULO] [decimal](10, 2) NULL,<br />
+               [VL_MULTA] [decimal](8, 2) NULL,<br />
+               [PG_MULTA] [decimal](8, 2) NULL,<br />
+               [PG_CM] [decimal](8, 2) NULL,<br />
+               [PG_JUROS] [decimal](8, 2) NULL,<br />
+               [DESC_AUTORIZ] [decimal](10, 2) NULL,<br />
+               [DT_PGTO] [datetime] NULL,<br />
+               [TIPO_PGTO] [char](1) NULL,<br />
+               [NUM_LANC_CP] [int] NULL,<br />
+               [DATA_PREV_CR] [datetime] NULL,<br />
+               [ACORDO] [char](1) NULL,<br />
+           CONSTRAINT [PK_Boletos] PRIMARY KEY CLUSTERED<br />
+            (<br />
+            [MNEM_COND] ASC,<br />
+            [BLOCO] ASC,<br />
+            [UNIDADE] ASC,<br />
+            [NUM_EMISSAO] ASC<br />
+            )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]<br />
+            ) ON [PRIMARY]<br />
+            GO<br />
+        </span><br /><br />
+        Desta forma adicionamos ao banco a tabela Boletos.
+           
+    </p>
+</div>

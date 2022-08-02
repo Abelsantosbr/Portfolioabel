@@ -1,0 +1,114 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{ ViewData["Title"] = "WindowsForms"; }
+
+<div>
+    <textarea readonly class="tituloAreaCodigo">
+       Windows Forms - Aplicação de Área de Trabalho 
+    </textarea>
+    <br />
+    <p class="areaTexto">
+        Windows Forms é uma tecnologia da Microsoft para criação de aplicações Desktop .<br />
+        
+        Eu não tive muitas experiências com esta tecnologia já que iniciei desenvolvimento de interfaces gráficas utilizando o Delphi que no início já em encantou.
+        Claro que isso não justifica por si só conhecer outras tecnologia visuais como o windows forms, WPF, Web Forms, etc... mas como meus projetos são legados 
+        de muito tempo, restrito a cada época, não vi necessidade dentro dos meus negócios de desenvolviemnto investir em outra tecnologia cujos resultados fossem
+        tão bons quanto com o Delphi.<br />
+
+        O windows forms fornecido no Visual Studio permite as ações do tipo "arrastar e soltar" de controles visuais de forma fácil para criar aplicativos da área de trabalho.<br />
+
+        No exemplo abaixo demonstro um CRUD de um pequeno projeto de Clínica. Um CRUD para a entidade Paciente com acesso à dados através do componente TableAdaper
+        mas poderia usar objetos de commando como o SqlCommand do provedor SqlClient.
+    </p>
+    <div>
+        <a href="~/imagens/Winforms_pacientes.png">Foto Tela Pacientes </a>
+        <br />
+    </div>
+    <br />
+    <h4> Código C# - CRUD Paciente</h4>
+    <textarea readonly class="areaCodigo">
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
+using Consultas.dsConsultaTableAdapters;
+
+namespace Consultas
+{
+    public partial class frmPacienteHerdado : Consultas.frmBase
+    {
+        public frmPacienteHerdado()
+        {
+            InitializeComponent();
+        }
+
+        public override bool Salvar()
+        {
+            bool bSalvar = false;
+            dsConsultaTableAdapters.PacienteTableAdapter ta = new PacienteTableAdapter();
+            if (sStatus == StatusCadastro.scInserindo )
+            {
+                bSalvar = ta.Insert(txtNome.Text, txtTelefone.Text) > 0;
+            }
+            else
+                if (sStatus == StatusCadastro.scEditando)
+            {
+                bSalvar = (ta.Update(txtNome.Text, txtTelefone.Text, _nCodGenerico) > 0);
+            }
+                return bSalvar;
+        }
+
+        public override bool Excluir()
+        {
+            bool bExcluir = false;
+            dsConsultaTableAdapters.PacienteTableAdapter ta = new PacienteTableAdapter();
+            bExcluir = (ta.Delete(_nCodGenerico) > 0);
+            return bExcluir;
+        }
+
+        public override bool Localizar()
+        {
+            bool bLocalizar = false;
+            frmPesquisaPacienteHerdado frmPesquisa = new frmPesquisaPacienteHerdado();
+            if (frmPesquisa.ShowDialog() == DialogResult.OK)
+            {
+                bLocalizar = (frmPesquisa.sCdCodigo != "");
+                if (bLocalizar)
+                {
+                    _nCodGenerico = int.Parse(frmPesquisa.sCdCodigo);
+                }
+            }
+            
+            return bLocalizar;
+        }
+
+        public override void CarregaValores()
+        {
+            dsConsulta.PacienteDataTable dt = new dsConsulta.PacienteDataTable();
+            PacienteTableAdapter ta = new PacienteTableAdapter();
+            dt = ta.PesquisaID(_nCodGenerico);
+            
+            if (dt.Rows.Count > 0)
+            {
+                lblCodigo.Text = dt.Rows[0]["IDPACIENTE"].ToString();
+                txtNome.Text = dt.Rows[0]["NOMEPACIENTE"].ToString();
+                txtTelefone.Text = dt.Rows[0]["TELEFONE"].ToString();
+            }
+
+        }
+
+        private void frmPacienteHerdado_Load(object sender, EventArgs e)
+        {
+            
+        }
+    }
+}
+
+    </textarea>
+</div>}
+
+

@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Contato";
+}
+
+<img src="~/imagens/contato.jpg" width="100" height="100"/>
+
+<p class="areaTituloContato">Formulário de Contato</p>
+<div>
+    <p class="areaTextoContato">
+        Utilize este formulário para proposta de oportunidade trabalho. elogios, críticas construtivas.<br />
+        Para os leitores que são profissionais em qualquer contexto descrito neste portolio e desejarem se manifestar
+        para corrigir e/ou melhorar fiquem à vontade para colaborarem com meus conhecimentos.<br /> 
+        Minhas desculpas pelos erros de português pois não foi submetido a nenhuma revisão técnica.<br />
+        Muito obrigado.
+    </p>
+</div>
+<form asp-controller="Portfolio" asp-action="Contato" class="contato">
+    <div class="mb-3">
+        <label for="nome" class="form-label">Nome</label>
+        <input type="text" class="form-control" id="nome" name="nome" placeholder="Informe o nome" />
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" name="email" placeholder="nome@email.com" />
+    </div>
+    <div class="mb-3">
+        <label for="mensagem" class="form-label">Mensagem</label>
+        <textarea class="form-control" id="mensaje" name="mensagem" rows="4"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Enviar</button>
+</form>

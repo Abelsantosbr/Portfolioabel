@@ -1,0 +1,105 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{ ViewData["Title"] = "WebForms"; }
+
+<div>
+    <textarea readonly class="tituloAreaCodigo">
+       Web Forms - Páginas Web
+    </textarea>
+    <br />
+    <p class="areaTexto">
+        Web Forms são páginas que os usuários solicitam usando o navegador.<br />
+        De forma simplista, páginas web requisitam processos ao servidor web através de solicitações do usuário via navegador.Essas páginas,
+        dinâmicas,  retornam ao usuário com as respostas solicitadas.<br />
+
+        A interface do usuário (UI) construída com recursos HTML, CSS e Scripts são renderizadas em qualquer navegador interagindo com o usuário e com o servidor.<br />
+
+        Tenho pouca experiência com web forms assim como em windows forms no APS.NET. Utilizo mais o ASP.NET MVC Framework porque inicei com ele o conceito de padrão
+        de projeto MVC que organiza e estrutura o projeto em camadas.<br />
+
+        Redesenvolvi o exemplo de web forms abaixo estudando sua concepção através do projeto WingTip Toys original da MSDN.<br />
+
+        Este projeto utiliza o EntityFramework para acesso à dados e Linq-To-Entities Queries.<br />
+
+    </p>
+    <div>
+        <a href="~/imagens/Webfoms_products.png">Foto Tela de Produtos </a>
+        <br />
+    </div>
+    <br />
+    <h4> Código C# - Produtos</h4>
+    <textarea readonly class="areaCodigo">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using WingtipToys.Models;
+using System.Web.ModelBinding;
+
+namespace WingtipToys
+{
+    public partial class ProductList : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        public IQueryable<Product> GetProducts([QueryString("id")] int? categoryId)
+        {
+            var _db = new WingtipToys.Models.ProductContext();
+            IQueryable<Product> query = _db.Products;
+            if (categoryId.HasValue && categoryId > 0)
+            {
+                query = query.Where(p => p.CategoryID == categoryId);
+            }
+            return query;
+        }
+    }
+}
+
+    </textarea>
+    <br />
+
+    <h4> Código C# - Detalhes de Produtos</h4>
+    <textarea readonly class="areaCodigo">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using WingtipToys.Models;
+using System.Web.ModelBinding;
+
+namespace WingtipToys
+{
+    public partial class ProductDetails : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        public IQueryable<Product> GetProduct([QueryString("productID")] int? productId)
+        {
+            var _db = new WingtipToys.Models.ProductContext();
+            IQueryable<Product> query = _db.Products;
+            if (productId.HasValue && productId > 0)
+            {
+                query = query.Where(p => p.ProductID == productId);
+            }
+            else
+            {
+                query = null;
+            }
+            return query;
+        }
+    }
+}
+    </textarea>
+
+</div>}

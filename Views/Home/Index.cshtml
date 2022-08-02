@@ -1,0 +1,142 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<!DOCTYPE html>
+
+
+<html lang="pt-br">
+
+<head>
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link type="text/css" rel="stylesheet" media="screen" href="estilos.css" />
+
+    
+    <asp:ScriptManager ID="ScriptManager1"
+                       EnablePageMethods="true"
+                       EnablePartialRendering="true" runat="server" />
+
+    <script type="text/javascript">
+        $(window).load(function (ev) {
+            $.ajax({
+                type: 'Post',
+                dataType: 'json',
+                url: 'Portfolio/Contato',
+                data: JSON.stringify({ data: "" }),
+                contentType: 'application/json; charset=utf-8',
+
+                success: function (data) {
+                    //alert('sucesso!!');
+                }
+            });
+        });
+
+    </script>
+
+
+
+</head>
+
+
+<body class="principal">
+    <div id="habilidades">
+        <div id="header">
+            <center><b id="titulo_header">PROJETOS INDEPENDENTES DE LONGA DURAÇÃO</b></center>
+            <section id="conteudo-top">
+                <p>
+                    Desenvolvimento de projetos desde a concepção à conclusão. Implantação, suporte e sustentação
+                    por mais de 30 anos (1990-2021)  em ERP's para o seguimento de Saúde e Administração de condomínios, loja de atacado e varejo.
+                </p>
+            </section>
+        </div>
+
+        <div>
+            <form id="conteudo-left" target="_blank">
+                <b>Habilidades de Linguagem</b>
+                <ol>
+                    <li><button class="botoes_linguagem" type="button" onclick="location.href='@Url.Action("CodigoCSharp", "Portfolio")'">C# &#9989;</button></li>
+                    <li><button class="botoes_linguagem" type="button" onclick="location.href='@Url.Action("CodigoDelphi", "Portfolio")'">Delphi (desktop) &#9989;</button></li>
+                    <li><button class="botoes_linguagem" type="button" onclick="location.href='@Url.Action("CodigoCss", "Portfolio")'">CSS &#9989;</button></li>
+                    <li><button class="botoes_linguagem" type="button" onclick="location.href='@Url.Action("CodigoJS", "Portfolio")'">JS &#9989;</button></li>
+                    <li><button class="botoes_linguagem" type="button" onclick="location.href='@Url.Action("CodigoJQuery", "Portfolio")'">JQuery &#9989;</button></li>
+                    <li><button class="botoes_linguagem" type="button" onclick="location.href='@Url.Action("CodigoBootstrap", "Portfolio")'">Bootstrap &#9989;</button></li>
+                    <li><button class="botoes_linguagem" type="button" onclick="location.href='@Url.Action("CodigoLinq", "Portfolio")'">Linq to Sql &#9989;</button></li>
+                </ol>
+            </form>
+            <form id="conteudo-centro">
+
+                <b>Habilidades .NET Intermediário</b>
+                <ol>
+                    <li><button class="botoes_net_intermediario" type="button" onclick="location.href='@Url.Action("Mvc", "Portfolio")'">MVC &#9989;</button></li>
+                    <li><button class="botoes_net_intermediario" type="button" onclick="location.href='@Url.Action("NetframeWork", "Portfolio")'">NetFramework &#9989;</button></li>
+                    <li><button class="botoes_net_intermediario" type="button" onclick="location.href='@Url.Action("EntityFrameWork", "Portfolio")'">EntityFramework &#9989;</button></li>
+                    <li><button class="botoes_net_intermediario" type="button" onclick="location.href='@Url.Action("Swagger", "Portfolio")'">SWAGGER &#9989;</button></li>
+                </ol>
+                <b>Banco de dados SQL-Server</b>
+                <ol>
+                    <li><button class="botoes_banco" type="button" onclick="location.href='@Url.Action("CriacaoBanco", "Portfolio")'">Criação de Banco &#9989;</button></li>
+                    <li><button class="botoes_banco" type="button" onclick="location.href='@Url.Action("CriacaoTabela", "Portfolio")'">Criação de Tabelas &#9989;</button></li>
+                    <li><button class="botoes_banco" type="button" onclick="location.href='@Url.Action("StoredProcedure", "Portfolio")'">Stored Procedures &#9989;</button></li>
+                    <li><button class="botoes_banco" type="button" onclick="location.href='@Url.Action("Function", "Portfolio")'">Functions &#9989;</button></li>
+                    <li><button class="botoes_banco" type="button" onclick="location.href='@Url.Action("Trigger", "Portfolio")'">Triggers &#9989;</button></li>
+                    <li><button class="botoes_banco" type="button" onclick="location.href='@Url.Action("ViewsBanco", "Portfolio")'">Views &#9989;</button></li>
+                    <li><button class="botoes_banco" type="button" onclick="location.href='@Url.Action("BackupRestore", "Portfolio")'">Backup/Restore &#9989;</button></li>
+                </ol>
+            </form>
+            <form id="conteudo-centro">
+                <b>FrameWork SPA Básico</b>
+                <ol>
+                    <li><button class="botoes_spa" type="button" onclick="location.href='@Url.Action("Angular", "Portfolio")'">Angular &#9989;</button></li>
+                </ol>
+                <b>Habilidades .NET Básico</b>
+                <ol>
+                    <li><button class="botoes_net_basico" type="button" onclick="location.href='@Url.Action("WebApi", "Portfolio")'">Web API / CORS &#9989;</button></li>
+                    <li><button class="botoes_net_basico" type="button" onclick="location.href='@Url.Action("WindowsForms", "Portfolio")'">Windows Forms &#9989;</button></li>
+                    <li><button class="botoes_net_basico" type="button" onclick="location.href='@Url.Action("WebForms", "Portfolio")'">Web Forms &#9989;</button></li>
+                    <li><button class="botoes_net_basico" type="button" onclick="location.href='@Url.Action("Webservice", "Portfolio")'">Web Service &#9989;</button></li>
+                    <li><button class="botoes_net_basico" type="button" onclick="location.href='@Url.Action("Core", "Portfolio")'">Core/Net5 &#9989;</button></li>
+                    <li><button class="botoes_net_basico" type="button" onclick="location.href='@Url.Action("EfCore", "Portfolio")'">EntityFramework / EFCore &#9989;</button></li>
+                    <li><button class="botoes_net_basico" type="button" onclick="location.href='@Url.Action("Migration", "Portfolio")'">Migrations &#9989;</button></li>
+                </ol>
+                <b>Inglês : Nível Intermediário</b>
+            </form>
+            <section id="conteudo-right">
+                <b>Noções teóricas</b>
+                <ol>
+                    <li><button class="botoes_nocoes" type="button" onclick="location.href='@Url.Action("Cleancode", "Portfolio")'">Clean Code &#9989;</button></li>
+                    <li><button class="botoes_nocoes" type="button" onclick="location.href='@Url.Action("Solid", "Portfolio")'">S.O.L.I.D. &#9989;</button></li>
+                    <li><button class="botoes_nocoes" type="button" onclick="location.href='@Url.Action("Microservicos", "Portfolio")'">Microserviços &#9989;</button></li>
+                    <li><button class="botoes_nocoes" type="button" onclick="location.href='@Url.Action("Docker", "Portfolio")'">Container (Docker) &#9989;</button></li>
+                    <li><button class="botoes_nocoes" type="button" onclick="location.href='@Url.Action("DevOps", "Portfolio")'">DevOps &#9989;</button></li>
+                    <li><button class="botoes_nocoes" type="button" onclick="location.href='@Url.Action("ScrumKanban", "Portfolio")'">Scrum/ Kanban &#9989;</button></li>
+                    <li><button class="botoes_nocoes" type="button" onclick="location.href='@Url.Action("Github", "Portfolio")'">Git / Github  &#9989;</button></li>
+                    <li><button class="botoes_nocoes" type="button" onclick="location.href='@Url.Action("Cloud", "Portfolio")'">Azure, AWS,Google &#9989;</button></li>
+                </ol>
+            </section>
+        </div>
+        <div class="footer">
+            <section id="footer_esquerda">
+                <p>  Telefone Celular: (11) 99321-5898</p>
+                <p>E-mail: abelsantos_br@yahoo.com.br</p>
+                <p>Facebook : https://www.facebook.com/abelsantos.br/</p>
+                <p>Linkedin : www.linkedin.com/in/abelsantos-dev-backend</p>
+                <p>Github : https://github.com/Abelsantosbr</p>
+                <p>Este Portfolio : http://portfolio.admisys.com.br/</p>
+                <br />
+            </section>
+            <section id="footer_direita">
+                <p>Este projeto foi desenvolvido em :  </p>
+                <p>.NET 5.0 - Visual Studio 2019  - Padrão de Projeto : MVC </p>
+                <p>Créditos : Agradeço a quem se identificar em </p>
+                <p>sites e vídeos na Internet</p>
+                <p>&nbsp;</p>
+                <p>Versão 1.0 (Beta)- Não responsiva (em 01/08/2022)</p>
+                <br />
+            </section>
+        </div>
+    </div>
+    <br />
+    <br />
+    <br />
+</body>
+</html>

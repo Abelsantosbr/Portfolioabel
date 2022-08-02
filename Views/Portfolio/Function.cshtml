@@ -1,0 +1,36 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{ ViewData["Title"] = "Function"; }
+
+<div>
+    <textarea readonly class="tituloAreaCodigo">
+       Banco de dados Sql Server - Function
+    </textarea>
+
+    <p readonly class="areaTexto">
+        Function é uma rotina T-SQL que realiza uma tarefa retornando valores ou tabelas.<br />
+        Uma função é sempre compilada no momento da execução.<br />
+                O exemplo abaixo é de uma função que retorna uma tabela de clientes que satisfaçam o
+        critério de estarem localizados no estado de São Paulo.
+
+        <br />
+        <span style="color:blue">
+            <br />
+            <span style="color:red">ATENÇÂO !!! Substituir o caracter especial & por arroba (não pode usar no texto por ser carater reservado)</span>
+            <br />
+
+            CREATE FUNCTION ClientesSP(&estado string)<br />
+            RETURNS TABLE <br />
+            AS<br />
+            RETURN (SELECT *<br />
+            FROM  Clientes<br />
+            WHERE estadoCliente = &estado)<br />
+        </span>
+
+        Para invocar a função :<br />
+        SELECT * FROM ClientesSP('SP')<br />
+
+
+    </p>
+</div>

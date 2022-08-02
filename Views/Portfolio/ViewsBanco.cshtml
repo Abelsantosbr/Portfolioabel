@@ -1,0 +1,45 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{ ViewData["Title"] = "Views"; }
+
+<div>
+    <textarea readonly class="tituloAreaCodigo">
+       Banco de dados Sql Server - Views
+    </textarea>
+
+    <p readonly class="areaTexto">
+        Uma View é uma Query que resulta uma tabela virtual à partir de uma ou mais tabelas reais, inclusive outras views.<br />
+        Views não possuem dados, somente uma visão deles em formato de linhas e colunas.<br />
+        Não ocupam espaço no banco de dados.<br />
+        São úteis em consultas complexas para dimiuir o nível de complexidade e otimizar o trabalho do desenvolvedor.<br />
+
+        No exemplo abaixo temos uma View que tem o simples objetivo de filtrar os títulos gerados na data atual até o momento atual
+        usando a data do servidor como parametro de comparação.
+        Embora simples ela pode ser muito utilizada se fizer parte das tarefas do usuário como apoio às decisões.
+        Pode ser medido o volume de carteira de títulos para negócios com bancos, fornecedores, etc..<br />
+        Eu mesmo nos meus projetos ao clientes sugeri diversos trabalhos com Views para a tomada de decisão e estatísticas.
+        <br />
+        <span style="color:blue">
+            <br />
+            USE PF_SGCR<br />
+            GO<br />
+            <br />
+            CREATE VIEW TitulosHoje AS<br />
+            select b.mnem_cond as Codigo, b.Bloco as Bloco, <br />
+            b.unidade as Unidade, b.num_emissao as Emissao, b.nome_mor as Proprietario,<br />
+            b.num2_titulo as Titulo, b.dt_vencimento as Vencimento, b.vl_titulo as Valor_principal<br />
+            from boletos as b<br />
+            where<br />
+            dt_emissao = CONVERT(VARCHAR, sysdatetime(), 103)<br />
+        </span>
+        <br />
+        Para invocar a a View  :<br />
+        SELECT * FROM TitulosHoje
+        <br />
+        <br />
+
+
+
+    </p>
+</div>

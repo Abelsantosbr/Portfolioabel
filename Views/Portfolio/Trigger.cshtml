@@ -1,0 +1,50 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{ ViewData["Title"] = "trigger"; }
+
+<div>
+    <textarea readonly class="tituloAreaCodigo">
+       Banco de dados Sql Server - Trigger
+    </textarea>
+
+    <p readonly class="areaTexto">
+        Um Trigger(gatilho) é um tipo especial de procedimento armazenado disparado automaticamente quando
+        um evento ocorre no servidor de banco de dados.
+        <br />
+        No exemplo abaixo, para cada inserção de verba na tabela VERBASBOLETO será gerado uma tabela temporária
+        chamada INSERTED que conterá o registro incluso.
+        Logo em seguida a tabela BOLETOS é atualizada com o valor principal do boleto somando o valor da verba inserida somente para 
+        o número de boleto passado como parãmetro.
+
+        <br />
+        <span style="color:blue">
+            <br />
+            <span style="color:red">ATENÇÂO !!! Substituir o caracter especial & por arroba (não pode usar no texto por ser carater reservado)</span>
+            <br />
+
+            CREATE TRIGGER AtualizaBoleto<br />
+            ON VERBASBOLETO<br />
+            FOR INSERT<br />
+            AS<br />
+            BEGIN<br />
+            DECLARE<br />
+            &VALOR  DECIMAL(10,2),<br />
+            &NUMEROBOLETO INT<br />
+
+            SELECT &VALOR = VLVERBA, &NUMEROBOLETO = NUMEROBOLETO FROM INSERTED<br />
+
+            UPDATE BOLETOS SET VL_PRINCIPAL = VALOR_PRINCIPAL + &VALOR<br />
+            WHERE NUMEROBOLETO = &NUMEROBOLETO<br />
+            <br />
+            GO<br />
+        </span>
+
+        Para invocar a trigger :<br />
+        INSERT INTO VERBASBOLETO VALUES (135.88, 675455789)
+        <br />
+
+
+
+    </p>
+</div>

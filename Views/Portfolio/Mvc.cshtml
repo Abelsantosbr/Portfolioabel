@@ -1,0 +1,32 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{ ViewData["Title"] = "Mvc"; }
+
+<div>
+    <textarea readonly class="tituloAreaCodigo">
+       Padrão de Projetos MVC (Model-View-Controller)
+    </textarea>
+
+    <p readonly class="areaTexto">
+            <span style="color:blue">Model</span> - Objeto modelo de negócio responsável pelo gerenciamento de dados através de funções
+            resolvendo as demandas de negócios.<br />
+            <span style="color:blue">View</span>  - Camada de apresentação de dados na interface do usuário, enviando requisiçãoes e recebendo
+            respostas da camada de controle e do model.<br />
+            <span style="color:blue">Controller</span> - Responsável por processar dados enviados da camada de apresentação e de dados, 
+            devolvendo respostas para as páginas.<br /><br />
+
+            Os projetos para web que desenvolvi, por longo tempo de existência em produção, tiveram o MVC como
+            padrão de projetos que contribui muito na otimização da velocidade de respostas para as solicitações
+            dos usuários que envolvam acesso à dados. Este modelo permite uma melhor visualização através das
+            3 camadas Model-View-Controller que, além de permitir organização, facilita e muito no desenvolviemnto
+            de código. Por ser separado em camadas também permite o desenvolvimento em equipe onde cada membro pode 
+            receber partes do projeto de forma independente e concorrente.
+            Embora não tenha tido a experiência de trabalho em equipe tenho a perfeita ciência dos benefícios de
+            tempo e qualidade de projeto utilizando este padrão em metodologias ágil.
+
+            Este padrão pressupõe as camadas interagirem isoladamente mas respeitando um princípio S.O.L.I.D. da
+            responsabilidade única aplicada a classes, ou seja, cada camada tem sua única responsabilidade 
+            dentro do padrão.
+    </p>
+</div>

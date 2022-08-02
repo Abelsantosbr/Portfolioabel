@@ -1,0 +1,104 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{ ViewData["Title"] = "Webservice"; }
+
+<div>
+    <textarea readonly class="tituloAreaCodigo">
+       Web Service - Serviço Web
+    </textarea>
+    <br />
+    <p class="areaTexto">
+        Um Web service é um serviço especializado em transferir dados entre softwares através de protocolos de comunicação para diferentes plataformas,
+        independentemente de linguagens de programação. Os Web services funcionam com qualquer sistema operacional, plataforma de hardware ou linguagem
+        de programação de suporte Web.</>
+
+        Os Web services não suportam páginas web, apenas tranportam mensagens entre pontos através de protocolo de mensagem como o SOAP ou REST e o protocolo 
+        de transporte HTTP.<br />
+
+        Web service é uma API que fornece diversos beneficios como integração de dados e sistemas, reutilização de código, segurança e custo menor que as API´s REST.<br />
+
+        Abaixo um exemplo de um serviço Web que realiza a pesquisa de um cep retornando os dados e imprimindo em console.<br />
+
+    </p>
+    <div>
+        <a href="~/imagens/WebService_cep.png">Foto Janela desktop com resultado de cep pesquisado </a>
+        <br />
+    </div>
+    <br />
+    <h4> Código C# - Pesquisa de Cep</h4>
+    <textarea readonly class="areaCodigo">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using WebServiceCEP.CepService;
+
+namespace WebServiceCEP
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Informe o CEP ?.....");
+            var cep = Console.ReadLine();
+           
+
+            if (! string.IsNullOrEmpty(cep))
+                {
+                ConsultarCEP(cep);
+            }
+        }
+
+        public static void ConsultarCEP(string cep)
+        {
+            using (var ws = new AtendeClienteClient())
+            {
+                var resposta = ws.consultaCEP(cep);
+
+                Console.Clear();
+                Console.WriteLine(string.Format("Endereço : {0}", resposta.end));
+                Console.WriteLine(string.Format("Bairro : {0}", resposta.bairro));
+                Console.WriteLine(string.Format("Cidade : {0}", resposta.cidade));
+                Console.WriteLine(string.Format("U.F : {0}", resposta.uf));
+                Console.WriteLine(string.Format("CEP : {0}", resposta.cep));
+                Console.WriteLine("");
+                Console.WriteLine("Pressione qualquer tecla para continuar...");
+                Console.ReadKey();
+
+            }
+
+
+        }
+    }
+}
+    </textarea>
+    <br />
+    <h4> Código C# - App.config - Configurações do serviço</h4>
+    <textarea readonly class="areaCodigo">
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <startup> 
+    <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.7.2" />
+    </startup>
+    <system.serviceModel>
+    <bindings>
+    <basicHttpBinding>
+    <binding name="AtendeClienteServiceSoapBinding">
+    <security mode="Transport" />
+                </binding>
+    <binding name="AtendeClienteServiceSoapBinding1" />
+            </basicHttpBinding>
+        </bindings>
+    <client>
+    <endpoint address="https://apps.correios.com.br/SigepMasterJPA/AtendeClienteService/AtendeCliente"
+              binding="basicHttpBinding" bindingConfiguration="AtendeClienteServiceSoapBinding"
+              contract="CepService.AtendeCliente" name="AtendeClientePort" />
+        </client>
+    </system.serviceModel>
+</configuration>
+    </textarea>
+    <br />
+
+</div>}

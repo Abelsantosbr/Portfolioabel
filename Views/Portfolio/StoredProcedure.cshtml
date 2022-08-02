@@ -1,0 +1,82 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{ ViewData["Title"] = "StoredProcedure"; }
+
+<div>
+    <textarea readonly class="tituloAreaCodigo">
+       Banco de dados Sql Server - Stored Procedure
+    </textarea>
+
+    <p readonly class="areaTexto">
+        Procedimento armazenado é um excelente recurso de programação de script sql que possibilita a execução
+        de tarefas repetitivas como CRUD (create,read,update,delete) nas tabelas do banco de dados.
+        Qualquer tarefa de banco que possui a caracteristica de ser repetitiva podemos usar este recurso.
+        O procedimento aceita variáveis como parâmetros para definir critérios de execução. 
+        O procedimento é sempre pré-compilado e armazenado para chamadas de execução.
+        <br />
+        Abaixo um exemplo de stored procedure que realiza inserção de um registro na tabela Boletos.
+        <br />
+        <span style="color:blue">
+            <br />
+            <span style="color:red">ATENÇÂO !!! Substituir o caracter especial & por arroba (não pode usar no texto por ser carater reservado)</span>
+            <br />
+            USE [PF_SGCR]<br />
+            GO<br />
+
+            SET ANSI_NULLS ON<br />
+            GO<br />
+
+            SET QUOTED_IDENTIFIER ON<br />
+            GO<br />
+
+            CREATE PROCEDURE [dbo].[P_InsereBoletos]<br />
+            (&Mnem_cond char(6),<br />
+            &Bloco char(1),<br />
+            &Unidade int,<br />
+            &Num_emissao int,<br />
+            &Nome_mor varchar(50),<br />
+            &Num1_titulo smallint,<br />
+            &Num2_titulo int,<br />
+            &Dv_titulo char(1),<br />
+            &Dt_vencimento datetime,<br />
+            &Dt_emissao datetime,<br />
+            &Vl_titulo decimal(10,2),<br />
+            &Vl_multa decimal(8,2),<br />
+            &Pg_multa decimal(8,2),<br />
+            &Pg_cm decimal(8,2),<br />
+            &Pg_juros decimal(8,2),<br />
+            &Desc_autoriz decimal(10,2),<br />
+            &Dt_pgto datetime,<br />
+            &Tipo_pgto char(1),<br />
+            &Num_lanc_cp int,<br />
+            &Data_prev_cr datetime,<br />
+            &Acordo char(1))<br />
+            AS<br />
+            BEGIN TRANSACTION<br />
+            INSERT  dbo.Boletos(<br />
+            Mnem_cond,Bloco,Unidade,Num_emissao,Nome_mor,Num1_titulo,<br />
+            Num2_titulo,Dv_titulo,Dt_vencimento,Dt_emissao,Vl_titulo,<br />
+            Vl_multa,Pg_multa,Pg_cm,Pg_juros,Desc_autoriz,Dt_pgto,<br />
+            Tipo_pgto,Num_lanc_cp,Data_prev_cr,Acordo)<br />
+            VALUES<br />
+            (&Mnem_cond,&Bloco,&Unidade,&Num_emissao,&Nome_mor,&Num1_titulo,<br />
+            &Num2_titulo,&Dv_titulo,&Dt_vencimento,&Dt_emissao,&Vl_titulo,<br />
+            &Vl_multa,&Pg_multa,&Pg_cm,&Pg_juros,&Desc_autoriz,&Dt_pgto,<br />
+            &Tipo_pgto,&Num_lanc_cp,&Data_prev_cr,&Acordo)<br />
+            IF @@ERROR <> 0<br />
+            BEGIN<br />
+            ROLLBACK TRANSACTION<br />
+            RETURN @@ERROR<br />
+            END<br />
+
+            COMMIT TRANSACTION<br />
+
+
+            GO<br />
+
+
+
+        </span>
+    </p>
+</div>

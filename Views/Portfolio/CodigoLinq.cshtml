@@ -1,0 +1,45 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{ ViewData["Title"] = "CodigoBootstrap"; }
+
+<div>
+    <textarea readonly class="tituloAreaCodigo">
+       Código Linto to Sql 
+    </textarea>
+
+    <textarea readonly class="areaCodigo">
+    public IEnumerable<BoletoModel>
+        GetBoleto()
+        {
+        FormCollection frmcollection = new FormCollection();
+
+        string vmnemcond = HttpContext.Current.Request.Cookies["condominio"].Value;
+        char vbloco = Convert.ToChar(HttpContext.Current.Request.Cookies["bloco"].Value);
+        int vunidade = Convert.ToInt16(HttpContext.Current.Request.Cookies["unidade"].Value);
+
+        IList<BoletoModel>
+            boletoLista = new List<BoletoModel>();
+                var consulta = from q in MD_sgcr_DataContext.Boletos
+                where q.Mnem_cond == vmnemcond &&
+                q.Bloco == vbloco &&
+                q.Unidade == vunidade &&
+                (q.Ativo == null | q.Ativo == 'S' | q.Ativo == ' ') &&
+                (q.Dt_acordo == null | q.Dt_acordo == Convert.ToDateTime("30/12/1899")) &&
+                q.Vl_titulo > 0 &&
+                (q.Dt_pgto == null | q.Dt_pgto == Convert.ToDateTime("30/12/1899"))
+                select q;
+       </textarea>
+
+    <textarea readonly class="tituloAreaCodigo">
+       Código Linq to Entities (Entity FrameWork)
+    </textarea>
+
+    <textarea readonly class="areaCodigo">
+
+         MD_sgmainDataContext condominios = new MD_sgmainDataContext();
+         cad_unid unidade = condominios.cad_unids.Where(unid => unid.MNEM_COND == boleto.Mnem_cond &&
+                                                                      unid.BLOCO == boleto.Bloco &&
+                                                                      unid.UNIDADE == boleto.Unidade).SingleOrDefault();
+    </textarea>
+</div>

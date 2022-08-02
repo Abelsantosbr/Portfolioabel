@@ -1,0 +1,598 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@{ ViewData["Title"] = "CodigoCss"; }
+
+<div>
+    <textarea readonly class="tituloAreaCodigo">
+       Código CSS com Media Queries
+    </textarea>
+    <textarea readonly class="areaCodigo">
+<style>
+
+    .glyphicon {
+        font-size: 4em;
+    }
+
+    * {
+        margin: 0px;
+        padding: 0px;
+        font-family: Arial;
+    }
+
+    .fundo {
+        display: block;
+        background-color: silver;
+        font-family: Arial;
+        font-size: small !important;
+    }
+
+    .principal {
+        background-color: #ccc;
+        width: 1200px;
+        margin: auto;
+        margin-top: 20px;
+        padding: 10px;
+    }
+
+    .distancia {
+        padding: 15px;
+        background-image: linear-gradient(to bottom,lightblue 0,#fff 140%);
+    }
+
+    .painel_esquerdo {
+        background-image: linear-gradient(to right,black 0,#fff 140%);
+        color: white;
+        font-size: 1.2em;
+        width: 600px;
+    }
+
+    .painel_video {
+        width: 600px;
+        height: 300px;
+        margin-left: 5%;
+    }
+
+    .painel_video_cortesia {
+        width: 200px;
+        height: auto;
+    }
+
+
+    .painel_video2_cortesia {
+        width: 20%;
+        height: 20%;
+    }
+
+    .painel_video3_cortesia {
+        width: 250px;
+        height: 130px;
+    }
+
+    .tam_img_suporte {
+        width: 150px;
+    }
+
+    .suporte {
+        text-align: center;
+        font-size: 1.2em;
+        color: black;
+    }
+
+    .suporte2 {
+        font-size: 1.5em;
+        color: red;
+        margin-left: 20%;
+    }
+
+    .suporte3 {
+        font-size: 1.5em;
+        color: red;
+        margin-left: 15%;
+    }
+
+    .suporte4 {
+        font-size: 1.5em;
+        color: red;
+        margin-left: 10%;
+    }
+
+    .coluna1 {
+        background-color: ghostwhite;
+        padding: 10px;
+    }
+
+    .coluna2 {
+        background-color: antiquewhite;
+        padding: 10px;
+    }
+
+    .coluna3 {
+        background-color: floralwhite;
+        padding: 10px;
+    }
+
+    .cortesia {
+        background-color: antiquewhite;
+        padding: 10px;
+        border-radius: 10px 20px 20px;
+    }
+
+    .condominio {
+        text-align: justify;
+        font-size: 110%;
+        color: black;
+        margin-left: 2%;
+        margin-right: 2%;
+    }
+
+    .clinica {
+        text-align: justify;
+        font-size: medium;
+        color: black;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .ambiente {
+        text-align: center;
+        font-size: large;
+        color: Green;
+    }
+
+
+    .servicos {
+        text-align: center;
+        font-size: large;
+        color: red;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .servicos_cliente {
+        text-align: justify;
+        font-size: medium;
+        color: blue;
+        background-color: antiquewhite;
+    }
+
+    .window {
+        grid-template-columns: repeat(auto-fit, 100px);
+        grid-template-rows: repeat(2, 100px);
+        margin-top: 1%;
+        width: 48%;
+        height: 65%;
+        color: white;
+        font-weight: bold;
+        font-size: medium;
+        position: fixed;
+        background-image: linear-gradient(to right, cadetblue 0,#fff 100%);
+        z-index: 9900;
+        border-radius: 10px 20px 20px;
+    }
+
+    .window_cookies {
+        display: block;
+        grid-gap: 5px;
+        grid-template-columns: repeat(auto-fit, 100px);
+        grid-template-rows: repeat(2, 100px);
+        bottom: 0; 
+        width: 88%;
+        height: 9%;
+        font-weight: bold;
+        font-size: 1.3em;
+        position: fixed;
+        z-index: 9900;
+        background-color: blue;
+        border-radius: 20px 20px 20px;
+        padding: 2px;
+    }
+
+    .linha_cookies {
+        display: block;
+        text-align: justify;
+        color: white;
+        margin-top: -1%;
+        width: 85%;
+    }
+
+    #janela1 {
+        margin-left: 20%;
+    }
+
+    #mascara {
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 9000;
+        background-color: silver;
+    }
+
+    #mascara2 {
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 9000;
+        background-color: silver;
+    }
+
+    .fechar {
+        display: grid;
+        float: right;
+        color: red;
+        font-size: small;
+    }
+
+    .fechar2 {
+        display: grid;
+        color: orangered;
+        font-size: 1.0em;
+        margin-left: 90%;
+    }
+
+        .fechar2:hover {
+            color: yellow;
+        }
+
+    .comunicado1 {
+        display: grid;
+        font-size: calc(0.5em + 1vw);
+        color: black;
+        position: relative;
+        font-style: italic;
+        font-weight: bold;
+    }
+
+    .comunicado2 {
+        display: inline;
+        font-size: medium;
+        color: Green;
+        font-weight: bold;
+        font-style: italic;
+        text-align: center;
+    }
+
+    .linha {
+        display: grid;
+        font-size: calc(0.4em + 1vw);
+        text-align: center;
+        color: red;
+    }
+
+    .linha_cookies {
+        display: grid;
+        font-size: 0.8em;
+        text-align: justify;
+        color: white;
+    }
+
+    .cabec_linha1 {
+        display: grid;
+        font-size: 1.2em;
+        color: black;
+        margin-left: 17%;
+        margin-top: 2%;
+    }
+
+    .linha2 {
+        display: grid;
+        font-size: calc(0.3em + 1vw);
+        margin-left: 20%;
+        color: black;
+    }
+
+    .linha3 {
+        display: grid;
+        text-align: center;
+        font-size: calc(0.2em + 1vw);
+        color: blue;
+    }
+
+    .linha4 {
+        display: grid;
+        text-align: center;
+        font-size: calc(0.5em + 1vw);
+        color: maroon;
+    }
+
+    .cabec {
+        display: grid;
+        height: 1%;
+        width: 35vw;
+        margin-top: 4%;
+        margin-left: 24%;
+        position: relative;
+        color: black;
+        background-color: antiquewhite;
+        border-radius: 10px 20px 30px;
+    }
+
+    .cabec_linha2 {
+        display: grid;
+        font-size: calc(0.5em + 1vw);
+        color: white;
+        margin-left: 38%;
+        margin-top: 2%;
+    }
+
+    #topo {
+        position: fixed;
+        width: 130px;
+        background-color: lavenderblush;
+        border-collapse: separate; /*separar as*/
+        border-spacing: 0 20px; /*çinhas da tabela de divulgadores*/
+        float: right;
+        margin-top: 5px;
+        font-family: sans-serif;
+    }
+
+    .logotipo {
+        position: absolute;
+        display: grid;
+        margin-left: 1%;
+        margin-top: 0.2%;
+        width: 9vh;
+    }
+
+    .altura_tabela {
+        margin-top: 2.5%;
+        float: left;
+        background-color: silver;
+    }
+
+    .lermais {
+        color: red;
+    }
+
+    .titulo {
+        font-size: 1.5em;
+        color: maroon;
+    }
+
+    @@media(max-width: 800px) {
+        .altura_tabela {
+            float: left;
+            background-color: silver;
+        }
+
+        .fundo {
+            background-color: silver;
+            font-family: Arial;
+            background-size: 100% auto;
+        }
+
+        .lermais {
+            color: red;
+        }
+
+        .titulo {
+            font-size: 1.5em;
+            color: maroon;
+        }
+
+        .window {
+            display: block;
+            grid-gap: 5px;
+            grid-template-columns: repeat(auto-fit, 100px);
+            grid-template-rows: repeat(2, 100px);
+            margin-top: -15%;
+            right: 0;
+            width: 70%;
+            height: auto;
+            color: White;
+            font-weight: bold;
+            position: fixed;
+            background-image: linear-gradient(to right,cadetblue 0,#fff 100%);
+            border-radius: 10px 20px 20px;
+        }
+
+        #janela1 {
+            left: -1.0em;
+        }
+
+        .window_cookies {
+            display: block;
+            grid-gap: 5px;
+            grid-template-columns: repeat(auto-fit, 100px);
+            grid-template-rows: repeat(2, 100px);
+            bottom: 1%;
+            right: 2.0em;
+            left: 2.0em;
+            width: 85%;
+            height: 25%;
+            font-weight: bold;
+            font-size: 0.9em;
+            position: fixed;
+            z-index: 9900;
+            background-color: blue;
+            border-radius: 10px 10px 10px;
+            padding: 2%;
+        }
+
+        .linha_cookies {
+            margin-top: 1.5%;
+            text-align: justify;
+            color: white;
+            width: 100%;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        #mascara {
+            display: block;
+            left: 0;
+            top: 0;
+            z-index: 9000;
+            background-color: silver;
+        }
+
+        #mascara2 {
+            display: block;
+            left: 0;
+            top: 0;
+            z-index: 9000;
+            background-color: silver;
+        }
+
+        .fechar {
+            display: block;
+            float: right;
+            color: red;
+            font-size: 0.8em;
+        }
+
+        .fechar2 {
+            display: block;
+            color: orangered;
+            font-size: 1.0em;
+            margin-left: 80%;
+            background-color: bisque;
+            border-radius: 3px 3px 3px;
+            width: 20%;
+        }
+
+            .fechar2:hover {
+                color: yellow;
+            }
+
+        .linha_cookies {
+            display: grid;
+            font-size: 1.0em;
+            text-align: justify;
+            color: white;
+        }
+
+        .logotipo {
+            display: none;
+        }
+
+        .cabec_linha1 {
+            display: grid;
+            font-size: 1.2em;
+            color: black;
+            float: left;
+            margin-top: 2%;
+        }
+
+        .linha {
+            font-size: calc(0.8em + 1vw);
+            width: 100%;
+            float: right;
+            color: black;
+        }
+
+        .linha2 {
+            display: grid;
+            font-size: calc(0.3em + 1vw);
+            margin-left: 20%;
+            color: Black;
+        }
+
+        .linha3 {
+            display: grid;
+            text-align: center;
+            font-size: calc(0.3em + 1vw);
+            color: blue;
+        }
+
+        .linha4 {
+            display: grid;
+            text-align: center;
+            font-size: calc(0.7em + 1vw);
+            color: maroon;
+        }
+
+        .comunicado1 {
+            display: grid;
+            font-size: calc(0.6em + 1vw);
+            color: Black;
+            position: relative;
+            font-style: italic;
+            font-weight: bold;
+        }
+
+        .distancia {
+            padding: 2%;
+            background-image: linear-gradient(to bottom,lightblue 0,#fff 140%);
+        }
+
+        .painel_esquerdo {
+            background-image: linear-gradient(to right,black 0,#fff 140%);
+            color: white;
+            font-size: calc(0.9em + 1vw);
+            width: auto;
+            height: auto;
+        }
+
+
+        .painel_video {
+            display: none;
+        }
+
+
+        .painel_video_cortesia {
+            width: 100%;
+            height: 100%;
+            display: inline-block;
+        }
+
+
+        .painel_video2_cortesia {
+            width: 100%;
+            display: grid;
+        }
+
+        .painel_video3_cortesia {
+            width: 100%;
+            display: grid;
+        }
+
+        .painel_video4_cortesia {
+            width: 100%;
+            display: grid;
+        }
+
+        .cortesia {
+            display: grid;
+            overflow: auto;
+            background-color: antiquewhite;
+            padding: 2%;
+            border-radius: 10px 20px 20px;
+        }
+
+        .tam_img_suporte {
+            width: 200px;
+            height: 130px;
+        }
+
+        .suporte {
+            display: inline-block;
+            margin-left: 0.5%;
+            font-size: 1.2em;
+            text-align: center;
+            color: black;
+        }
+
+        .suporte2 {
+            font-size: calc(0.6em + 1vw);
+            color: red;
+        }
+
+        .suporte3 {
+            font-size: calc(0.6em + 1vw);
+            color: red;
+        }
+
+        .suporte4 {
+            font-size: calc(0.6em + 1vw);
+            color: red;
+        }
+    }
+</style>
+    </textarea>
+
+</div>
